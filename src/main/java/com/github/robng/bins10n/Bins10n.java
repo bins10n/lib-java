@@ -182,37 +182,4 @@ public class Bins10n {
         if (val.compareTo(min) < 0 || val.compareTo(max) > 0)
             throw new Exception(); // TODO: Throw a proper exception with a message
     }
-
-    public static class Server implements WriteSerial, ReadSerial {
-        public String name;
-        public short hostOctet1;
-        public short hostOctet2;
-        public short hostOctet3;
-        public short hostOctet4;
-        public int portQuery;
-        public int portGame;
-
-        @Override
-        public void readSerial(InputStream s) throws IOException {
-            name = readStr(s);
-            hostOctet1 = readU8(s);
-            hostOctet2 = readU8(s);
-            hostOctet3 = readU8(s);
-            hostOctet4 = readU8(s);
-            portQuery = readU16(s);
-            portGame = readU16(s);
-        }
-        @Override
-        public int writeSerial(OutputStream s) throws Exception {
-            var written = 0;
-            written += writeStr(s, name);
-            written += writeU8(s, hostOctet1);
-            written += writeU8(s, hostOctet2);
-            written += writeU8(s, hostOctet3);
-            written += writeU8(s, hostOctet4);
-            written += writeU16(s, portQuery);
-            written += writeU16(s, portGame);
-            return written;
-        }
-    }
 }
